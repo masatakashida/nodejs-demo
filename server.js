@@ -15,18 +15,21 @@ function renderForm(posts, res) {
     res.end();
 }
 server.on('request', function(req, res){
+    if (req.url === '/favicon.ico') {
+      return;
+    }
     if (req.method === 'POST') {
         req.data = "";
-        req.on("readable", function() {
-            req.data += req.read();
+        req.on("data", function(chunk) {
+            req.data += chunk;
         });
         req.on("end", function() {
             var query = qs.parse(req.data);
             posts.push(query.name);
-            renderFrom(posts, res);
+            renderForm(posts, res);
         });
     } else {
-        renderForm(posts, res)
+        renderForm(posts, res);
     }
 });
 server.listen(settings.port);
