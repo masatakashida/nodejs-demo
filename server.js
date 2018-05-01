@@ -1,6 +1,6 @@
-var http = require('http');
-var fs = require('fs');
-var ejs = require('ejs');
+var http = require('http'),
+    fs = require('fs'),
+    ejs = require('ejs');
 var settings = require('./settings');
 var server = http.createServer();
 var template = fs.readFileSync(__dirname + '/public_html/hello.ejs', 'utf-8');
